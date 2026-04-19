@@ -5,21 +5,34 @@ import (
 	"net/http"
 )
 
-func main() {
 
+
+func main(){
 	mux := http.NewServeMux()
+	// instializing mux as a new serve mux
 	mux.HandleFunc("/", home)
+	// handlefunc -> tell the server that which function will execute when user visit a particular url, in this case the urll is "/"
 
+	log.Print("Starting the server on th port :4000")
+	// log.Print -> it will print the message on the localhost page
 
-	log.Print("starting the server on :4000")
+	err := http.ListenAndServe(":4000", mux)
+	// ListenAndServe -> it will start the server on the port 4000 and it will use mux as a handler to handle the incoming request, if we didn't use mux and create default server then it will we send nil as a handler and it will use the default server to handle the incoming request
 
-	http.ListenAndServe(":4000", mux)
-}
-
-func home(w http.ResponseWriter, r *http.Request){
-	_, err := w.Write([]byte("hello from snippetbox"))
+	// by using mux or any other handler we can create multiple routes and handle them with different functions at different ports or urls
 
 	if err != nil {
-		http.Error(w, "idk", http.StatusNotAcceptable)
+		log.Fatal(err)
 	}
+
+	// log.Fatal -> it will print the error message on the localhost page and it will stop the server if there is any error while starting the server
 }
+
+func home(w http.ResponseWriter,  r *http.Request){
+
+	w.Write([]byte("hello from snippetbox"))
+	// what WRITE did -> it write the response in the response body as byte slice
+
+}
+// w is a response writer which is used to write or basically send the resposne to the client
+// r is a request by the clent, basically it is used to read what the user wants to do, it contains all the information about the request like method, url, headers, body etc
