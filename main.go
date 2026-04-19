@@ -5,13 +5,15 @@ import (
 	"net/http"
 )
 
-
-
-func main(){
+func main() {
 	mux := http.NewServeMux()
 	// instializing mux as a new serve mux
-	mux.HandleFunc("/", home)
+	mux.HandleFunc("/{$}", home)
 	// handlefunc -> tell the server that which function will execute when user visit a particular url, in this case the urll is "/"
+
+	mux.HandleFunc("/snippet/view", snippetView)
+	mux.HandleFunc("/snippet/create", snippetCreate)
+
 
 	log.Print("Starting the server on th port :4000")
 	// log.Print -> it will print the message on the localhost page
@@ -28,11 +30,22 @@ func main(){
 	// log.Fatal -> it will print the error message on the localhost page and it will stop the server if there is any error while starting the server
 }
 
-func home(w http.ResponseWriter,  r *http.Request){
+func home(w http.ResponseWriter, r *http.Request) {
 
 	w.Write([]byte("hello from snippetbox"))
 	// what WRITE did -> it write the response in the response body as byte slice
 
 }
+
 // w is a response writer which is used to write or basically send the resposne to the client
 // r is a request by the clent, basically it is used to read what the user wants to do, it contains all the information about the request like method, url, headers, body etc
+
+// Add a snippetView handler function.
+func snippetView(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Display a specific snippet..."))
+}
+
+// Add a snippetCreate handler function.
+func snippetCreate(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Display a form for creating a new snippet..."))
+}
