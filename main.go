@@ -18,7 +18,6 @@ func main() {
 	mux.HandleFunc("/snippet/view/{id}", snippetView)
 	mux.HandleFunc("/snippet/create", snippetCreate)
 
-
 	log.Print("Starting the server on th port :4000")
 	// log.Print -> it will print the message on the localhost page
 
@@ -35,7 +34,6 @@ func main() {
 
 	// log.Fatal -> it will print the error on the terminal and kills the programm immediately
 
-	
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
@@ -51,14 +49,19 @@ func home(w http.ResponseWriter, r *http.Request) {
 // Add a snippetView handler function.
 func snippetView(w http.ResponseWriter, r *http.Request) {
 
-
 	id, err := strconv.Atoi(r.PathValue("id"))
 
-	 if err != nil {
+
+	//strconv -> it is a package in go which is used to convert the string to other data types like int, float, etc
+	// Atoi -> it is used to convert the string to integer
+	// PathValue -> it is used to get the value of the path parameter
+
+	if err != nil {
 		log.Fatal(err)
-		return 
+		return
 	}
 	msg := fmt.Sprintf("Display a specific snippet...%d", id)
+	// Sprintf -> it is used to format the string and return the formatted string
 	w.Write([]byte(msg))
 }
 
