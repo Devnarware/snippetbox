@@ -11,7 +11,9 @@ func main() {
 	mux.HandleFunc("/{$}", home)
 	// handlefunc -> tell the server that which function will execute when user visit a particular url, in this case the urll is "/"
 
-	mux.HandleFunc("/snippet/view", snippetView)
+	// {$} -> it is used to stop the restricting the sub tree or traling slash, url will only work if the exact url would match
+
+	mux.HandleFunc("/snippet/view/", snippetView)
 	mux.HandleFunc("/snippet/create", snippetCreate)
 
 
