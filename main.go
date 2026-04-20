@@ -27,11 +27,15 @@ func main() {
 
 	// by using mux or any other handler we can create multiple routes and handle them with different functions at different ports or urls
 
+	// it holds the programm here if we haven't any error and keep the server running unitl manually stop
+
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// log.Fatal -> it will print the error message on the localhost page and it will stop the server if there is any error while starting the server
+	// log.Fatal -> it will print the error on the terminal and kills the programm immediately
+
+	
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
@@ -46,10 +50,12 @@ func home(w http.ResponseWriter, r *http.Request) {
 
 // Add a snippetView handler function.
 func snippetView(w http.ResponseWriter, r *http.Request) {
-	id, err := strconv.Atoi("id")
 
-	if err != nil || id < 1 {
-		http.NotFound(w, r)
+
+	id, err := strconv.Atoi(r.PathValue("id"))
+
+	 if err != nil {
+		log.Fatal(err)
 		return 
 	}
 	msg := fmt.Sprintf("Display a specific snippet...%d", id)
