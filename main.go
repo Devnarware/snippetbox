@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 func main() {
@@ -13,7 +15,7 @@ func main() {
 
 	// {$} -> it is used to stop the restricting the sub tree or traling slash, url will only work if the exact url would match
 
-	mux.HandleFunc("/snippet/view/", snippetView)
+	mux.HandleFunc("/snippet/view/{id}", snippetView)
 	mux.HandleFunc("/snippet/create", snippetCreate)
 
 
@@ -44,7 +46,14 @@ func home(w http.ResponseWriter, r *http.Request) {
 
 // Add a snippetView handler function.
 func snippetView(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Display a specific snippet..."))
+	id, err := strconv.Atoi("id")
+
+	if err != nil || id < 1 {
+		http.NotFound(w, r)
+		return 
+	}
+	msg := fmt.Sprintf("Display a specific snippet...%d", id)
+	w.Write([]byte(msg))
 }
 
 // Add a snippetCreate handler function.
