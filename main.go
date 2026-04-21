@@ -72,5 +72,8 @@ func snippetCreate(w http.ResponseWriter, r *http.Request) {
 }
 // Add a snippetCreatePost handler function.
 func snippetCreatePost(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusCreated) 
+	// writeHeader -> used to update the status code of the response
+	// http.StatusCreated -> we are updating the status code to 201 which means that the resource has been created successfully
 	w.Write([]byte("Save a new Snippet...."))
 }
