@@ -18,6 +18,8 @@ func main() {
 	mux.HandleFunc("GET /snippet/view/{id}", snippetView)
 	mux.HandleFunc("GET /snippet/create", snippetCreate)
 
+	// 
+	mux.HandleFunc("POST /snippet/create", snippetCreatePost)
 	log.Print("Starting the server on th port :4000")
 	// log.Print -> it will print the message on the localhost page
 
@@ -67,4 +69,8 @@ func snippetView(w http.ResponseWriter, r *http.Request) {
 // Add a snippetCreate handler function.
 func snippetCreate(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Display a form for creating a new snippet..."))
+}
+// Add a snippetCreatePost handler function.
+func snippetCreatePost(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Save a new Snippet...."))
 }
