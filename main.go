@@ -10,13 +10,13 @@ import (
 func main() {
 	mux := http.NewServeMux()
 	// instializing mux as a new serve mux
-	mux.HandleFunc("/{$}", home)
+	mux.HandleFunc("GET /{$}", home)
 	// handlefunc -> tell the server that which function will execute when user visit a particular url, in this case the urll is "/"
 
 	// {$} -> it is used to stop the restricting the sub tree or traling slash, url will only work if the exact url would match
 
-	mux.HandleFunc("/snippet/view/{id}", snippetView)
-	mux.HandleFunc("/snippet/create", snippetCreate)
+	mux.HandleFunc("GET /snippet/view/{id}", snippetView)
+	mux.HandleFunc("GET /snippet/create", snippetCreate)
 
 	log.Print("Starting the server on th port :4000")
 	// log.Print -> it will print the message on the localhost page
@@ -51,13 +51,12 @@ func snippetView(w http.ResponseWriter, r *http.Request) {
 
 	id, err := strconv.Atoi(r.PathValue("id"))
 
-
 	//strconv -> it is a package in go which is used to convert the string to other data types like int, float, etc
 	// Atoi -> it is used to convert the string to integer
 	// PathValue -> it is used to get the value of the path parameter
 
-	if err != nil {
-		log.Fatal(err)
+	if err != nil || id < 1 {
+		http.NotFound(w,r)
 		return
 	}
 	msg := fmt.Sprintf("Display a specific snippet...%d", id)
