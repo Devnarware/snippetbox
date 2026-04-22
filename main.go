@@ -43,6 +43,9 @@ func home(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("hello from snippetbox"))
 	// what WRITE did -> it write the response in the response body as byte slice
 
+	w.Header().Add("Server", "GO")
+	// Header().Add() -> is used to add a custom header the response
+
 }
 
 // w is a response writer which is used to write or basically send the resposne to the client
