@@ -40,11 +40,14 @@ func main() {
 
 func home(w http.ResponseWriter, r *http.Request) {
 
-	w.Write([]byte("hello from snippetbox"))
-	// what WRITE did -> it write the response in the response body as byte slice
 
+	// it is must to add all the custom header before using w.Write or WriteHeader()
+	// in other words we can't add custom header after writing the response body or updating the status code of the response 
 	w.Header().Add("Server", "GO")
 	// Header().Add() -> is used to add a custom header the response
+
+	w.Write([]byte("hello from snippetbox"))
+	// what WRITE did -> it write the response in the response body as byte slice
 
 }
 
