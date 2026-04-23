@@ -37,6 +37,6 @@ func snippetCreate(w http.ResponseWriter, r *http.Request){
 
 
 func snippetCreatePost(w http.ResponseWriter, r *http.Request){
-	
-	w.Write([]byte("Hello from snippet box"))
+	w.WriteHeader(http.StatusCreated)
+	w.Write([]byte("Save a new Snippet..."))
 }
