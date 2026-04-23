@@ -63,7 +63,7 @@ func snippetView(w http.ResponseWriter, r *http.Request) {
 	//strconv -> it is a package in go which is used to convert the string to other data types like int, float, etc
 	// Atoi -> it is used to convert the string to integer
 	// PathValue -> it is used to get the value of the path parameter
-
+ 
 	if err != nil || id < 1 {
 		http.NotFound(w,r)
 		return
