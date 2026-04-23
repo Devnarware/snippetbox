@@ -11,7 +11,7 @@ func main(){
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("GET /{$}", home)
-	mux.HandleFunc("GET /snippet/view", snippetView)
+	mux.HandleFunc("GET /snippet/view/{id}", snippetView)
 	mux.HandleFunc("GET /snippet/create", snippetCreate)
 	mux.HandleFunc("POSt /snippet/create", snippetCreatePost)
 	// create all the handler function
