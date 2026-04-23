@@ -31,9 +31,9 @@ func snippetView(w http.ResponseWriter, r *http.Request){
 
 func snippetCreate(w http.ResponseWriter, r *http.Request){
 	
-	w.Write([]byte("Hello from snippet box"))
+	w.Write([]byte("Display a form for creating a new snippet..."))
 }
-
+// this is the snippetCreate function, which will handle the get request for "/snippet/create"
 
 
 func snippetCreatePost(w http.ResponseWriter, r *http.Request){
