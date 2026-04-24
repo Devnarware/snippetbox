@@ -35,8 +35,9 @@ func home(w http.ResponseWriter, r *http.Request){
 		return
 	}
 
-	err = ts.Execute(w, nil) 
+	err = ts.ExecuteTemplate(w, "base", nil)
 	// executing the template set and write it as a response
+	// use ececuteTemplate() instead of execute() because we have multiple templates
 
 
 	if err != nil {
