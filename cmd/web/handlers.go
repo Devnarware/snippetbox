@@ -9,8 +9,21 @@ import (
 )
 
 func home(w http.ResponseWriter, r *http.Request){
+
+	w.Header().Add("server", "Go")
+
+
+	// now adding all the neccessary htlm templates here
+	files := []string{
+
+				"./ui/html/base.html",
+				"./ui/html/pages/home.html",
+
+			}
+
 	// ts = template set
-	ts, err := template.ParseFiles("./ui/html/pages/home.html")
+	// (...) this ois the spread operator just like for each, it says every value in the slice
+	ts, err := template.ParseFiles(files...)
 	// tempplate.ParseFiles() -> it is used to read the content of template file and returns template set and err if any
 
 	if err != nil {
