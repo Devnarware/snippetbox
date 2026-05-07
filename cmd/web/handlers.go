@@ -60,6 +60,7 @@ func snippetView(w http.ResponseWriter, r *http.Request){
 	}
 
 	fmt.Fprintf(w, "Display a specific snippet with ID %d...", id)
+	// Fprintf -> it is used to write the formatted string to the response writer, it is similar to Sprintf but it writes the formatted string to the response writer instead of returning it as a string
 }
 // this is the snippetView Function, which will hanlde the get request for "/snippet/view/{id}"
 
