@@ -19,18 +19,17 @@ func main() {
 	mux.HandleFunc("GET /snippet/view/{id}", snippetView)
 	mux.HandleFunc("GET /snippet/create", snippetCreate)
 
-	// 
+
 	mux.HandleFunc("POST /snippet/create", snippetCreatePost)
 	log.Print("Starting the server on th port :4000")
-	// log.Print -> it will print the message on the localhost page
+	// log.Print -> it will print the message on the terminal, same as fmt.print but it print some extra info like time and date
 
 	err := http.ListenAndServe(":4000", mux)
-	// ListenAndServe -> it will start the server on the port 4000 and it will use mux as a handler to handle the incoming request, if we didn't use mux and create default server then it will we send nil as a handler and it will use the default server to handle the incoming request
+	// ListenAndServe -> it will start the server on the port 4000 and it will use mux as a handler to handle the incoming request, if we didn't use mux and create default server then we send nil as a handler and it will use the default server to handle the incoming request
 
-	// by using mux or any other handler we can create multiple routes and handle them with different functions at different ports or urls
+	// by using mux or any other handler, we can create multiple routes and handle and use them with different functions at different ports or urls
 
 	// it holds the programm here if we haven't any error and keep the server running unitl manually stop
-
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -43,11 +42,12 @@ func home(w http.ResponseWriter, r *http.Request) {
 
 
 	// it is must to add all the custom header before using w.Write or WriteHeader()
-	// in other words we can't add custom header after writing the response body or updating the status code of the response 
+	// in other words we can't add custom header or updating the status code of the response after writing the response body 
+
 	w.Header().Add("Server", "GO")
 	// Header().Add() -> is used to add a custom header the response
 
-	w.Write([]byte("hello from snippetbox"))
+	w.Write([]byte("hello from snippetbox")) // response body
 	// what WRITE did -> it write the response in the response body as byte slice
 
 }
