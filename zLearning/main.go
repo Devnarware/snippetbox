@@ -11,16 +11,19 @@ import (
 func main() {
 	mux := http.NewServeMux()
 	// instializing mux as a new serve mux
-	mux.HandleFunc("GET /{$}", home)
-	// handlefunc -> tell the server that which function will execute when user visit a particular url, in this case the urll is "/"
 
-	// {$} -> it is used to stop the restricting the sub tree or traling slash, url will only work if the exact url would match
+	// what is mux -> it is just a router, basic function of a router/mux is to find the righturl path and esecute the right handeler function 
+	
+	mux.HandleFunc("GET /{$}", home)
+	// handlefunc -> tell the server that which function will execute when user visit a particular url, in this case the url is "/"
+
+	// {$} -> it is used to stop (restricting) the sub tree or traling slash, url will only work if the exact url would match
 
 	mux.HandleFunc("GET /snippet/view/{id}", snippetView)
 	mux.HandleFunc("GET /snippet/create", snippetCreate)
-
-
 	mux.HandleFunc("POST /snippet/create", snippetCreatePost)
+
+
 	log.Print("Starting the server on th port :4000")
 	// log.Print -> it will print the message on the terminal, same as fmt.print but it print some extra info like time and date
 
