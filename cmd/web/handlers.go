@@ -25,7 +25,7 @@ func home(w http.ResponseWriter, r *http.Request){
 	// ts = template set
 	// (...) this is the spread operator just like for each, it says every value in the slice
 	ts, err := template.ParseFiles(files...)
-	// tempplate.ParseFiles() -> it is used to read the content of template file and returns template set and err if any
+	// template.ParseFiles() -> it is used to read the content of template file and returns template set and err if any
 
 	if err != nil {
 		log.Print(err.Error())
