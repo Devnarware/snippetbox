@@ -56,7 +56,7 @@ func home(w http.ResponseWriter, r *http.Request) {
 }
 
 // w is a response writer which is used to write or basically send the resposne to the client
-// r is a request by the clent, basically it is used to read what the user wants to do, it contains all the information about the request like method, url, headers, body etc
+// r is a request by the client, basically it is used to read what the user wants to do, it contains all the information about the request like method, url, headers, body etc
 
 // Add a snippetView handler function.
 func snippetView(w http.ResponseWriter, r *http.Request) {
