@@ -7,6 +7,10 @@ import (
 	"os"
 )
 
+type application struct{
+	logger *slog.Logger	
+}
+
 func main(){
 
 	addr := flag.String("addr", ":4000", "HTTP network address")
@@ -29,9 +33,10 @@ func main(){
 	mux.HandleFunc("POST /snippet/create", snippetCreatePost)
 	// create all the handler function
 
-	log.Printf("Server is starting at the port: %s", *addr)
+	logger.Info("Starting the server", "addr", *addr)
 
 	err := http.ListenAndServe(*addr, mux)
 
-	log.Fatal(err)
+	logger.Error(err.Error())
+	os.Exit(1)
 }

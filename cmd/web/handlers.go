@@ -2,13 +2,12 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"strconv"
 	"html/template"
 )
 
-func home(w http.ResponseWriter, r *http.Request){
+func (app *application)home(w http.ResponseWriter, r *http.Request){
 
 	w.Header().Add("server", "Go")
 
@@ -28,8 +27,8 @@ func home(w http.ResponseWriter, r *http.Request){
 	// template.ParseFiles() -> it is used to read the content of template file and returns template set and err if any
 
 	if err != nil {
-		log.Print(err.Error())
-		// it is used to print the error message in the console, not for client
+		app.logger.Error(err.Error(), "method", r.Method, "uri", r.URL.RequestURI())
+		// it is used to print the error message in the console, not for developer
 		http.Error(w,"Internal server error", http.StatusInternalServerError)
 		//it used to send the error to the client
 		// it is a light weight function which returns text respone with the status code and the msg u want to send to the client
@@ -42,7 +41,7 @@ func home(w http.ResponseWriter, r *http.Request){
 
 
 	if err != nil {
-		log.Print(err.Error())
+		app.logger.Error(err.Error(), "method", r.Method, "uri", r.URL.RequestURI())
 		http.Error(w, "Internal Server error", http.StatusInternalServerError)
 		return 
 	}
@@ -51,12 +50,12 @@ func home(w http.ResponseWriter, r *http.Request){
 // this is our Home function, which will handle the "/" route
 
 
-func snippetView(w http.ResponseWriter, r *http.Request){
+func (app *application)snippetView(w http.ResponseWriter, r *http.Request){
 	
 	id, err := strconv.Atoi(r.PathValue("id"))
 
-	if err != nil {
-		log.Fatal(err)
+	if err != nil || id < 1 {
+		http.NotFound(w, r)
 	}
 
 	fmt.Fprintf(w, "Display a specific snippet with ID %d...", id)
@@ -65,14 +64,14 @@ func snippetView(w http.ResponseWriter, r *http.Request){
 // this is the snippetView Function, which will hanlde the get request for "/snippet/view/{id}"
 
 
-func snippetCreate(w http.ResponseWriter, r *http.Request){
+func (app *application)snippetCreate(w http.ResponseWriter, r *http.Request){
 	
 	w.Write([]byte("Display a form for creating a new snippet..."))
 }
 // this is the snippetCreate function, which will handle the get request for "/snippet/create"
 
 
-func snippetCreatePost(w http.ResponseWriter, r *http.Request){
+func (app *application)snippetCreatePost(w http.ResponseWriter, r *http.Request){
 	w.WriteHeader(http.StatusCreated)
 	w.Write([]byte("Save a new Snippet..."))
 }
