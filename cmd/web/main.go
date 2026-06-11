@@ -40,6 +40,7 @@ func main(){
 	mux.HandleFunc("GET /snippet/create", app.snippetCreate)
 	mux.HandleFunc("POST /snippet/create", app.snippetCreatePost)
 	// create all the handler function
+	// we have to use app.func because we have to use the custom logger in the handler function, and the custom logger is a field of the application struct, so we have to use app.func to access the custom logger in the handler function
 
 	logger.Info("Starting the server", "addr", *addr)
 
