@@ -8,6 +8,7 @@ import (
 )
 
 func (app *application)home(w http.ResponseWriter, r *http.Request){
+	// have to recieve the application struct as a parameter because we have to use the custom logger in this function, and the custom logger is a field of the application struct, so we have to use app.logger to access the custom logger in this function
 
 	w.Header().Add("server", "Go")
 
@@ -29,6 +30,8 @@ func (app *application)home(w http.ResponseWriter, r *http.Request){
 	if err != nil {
 		app.logger.Error(err.Error(), "method", r.Method, "uri", r.URL.RequestURI())
 		// it is used to print the error message in the console, not for developer
+		// here we are using the custom looger we created
+
 		http.Error(w,"Internal server error", http.StatusInternalServerError)
 		//it used to send the error to the client
 		// it is a light weight function which returns text respone with the status code and the msg u want to send to the client
