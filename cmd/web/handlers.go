@@ -28,7 +28,7 @@ func (app *application)home(w http.ResponseWriter, r *http.Request){
 	// template.ParseFiles() -> it is used to read the content of template file and returns template set and err if any
 
 	if err != nil {
-		app.logger.Error(err.Error(), "method", r.Method, "uri", r.URL.RequestURI())
+		app.serverError(w, r, err)
 		// it is used to print the error message in the console, not for developer
 		// here we are using the custom looger we created
 
@@ -44,8 +44,7 @@ func (app *application)home(w http.ResponseWriter, r *http.Request){
 
 
 	if err != nil {
-		app.logger.Error(err.Error(), "method", r.Method, "uri", r.URL.RequestURI())
-		http.Error(w, "Internal Server error", http.StatusInternalServerError)
+		app.serverError(w, r, err)
 		return 
 	}
 
