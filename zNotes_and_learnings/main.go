@@ -1,4 +1,4 @@
-package learning
+package main
 
 
 import (
@@ -12,7 +12,7 @@ func main() {
 	mux := http.NewServeMux()
 	// instializing mux as a new serve mux
 
-	// what is mux -> it is just a router, basic function of a router/mux is to find the righturl path and esecute the right handeler function 
+	// what is mux -> it is just a router, basic function of a router/mux is to find the right url path and execute the right handeler function 
 	
 	mux.HandleFunc("GET /{$}", home)
 	// handlefunc -> tell the server that which function will execute when user visit a particular url, in this case the url is "/"
@@ -24,7 +24,7 @@ func main() {
 	mux.HandleFunc("POST /snippet/create", snippetCreatePost)
 
 
-	log.Print("Starting the server on th port :4000")
+	log.Print("Starting the server on the port :4000")
 	// log.Print -> it will print the message on the terminal, same as fmt.print but it print some extra info like time and date
 
 	err := http.ListenAndServe(":4000", mux)
